@@ -31,7 +31,7 @@ const LoginForm = () => {
         <div className="mt-8 space-y-6">
           <div className="space-y-5">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="username" className="block text-left text-sm font-medium text-gray-700">
                 Username
               </label>
               <div className="mt-1">
@@ -49,7 +49,7 @@ const LoginForm = () => {
             </div>
             
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-left text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="mt-1">
