@@ -1,8 +1,17 @@
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
   const [nama, setNama] = useState("");
   const [pass, setPass] = useState("");
+  const [isLogin, setLogin] = useState(false);
+  const navigate = useNavigate();
+
+  const formData = {
+    username:nama,
+    password:pass,
+  }
 
   const onChangeData = (e) => {
     const { name, value } = e.target;
@@ -10,15 +19,36 @@ const LoginForm = () => {
     if (name === "PasswordField") setPass(value);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault(); // penting!
-    if (nama === "Ryandy" && pass === "ty0055") {
-      // Untuk demo, kita hanya tampilkan alert sukses
-      alert("Login berhasil! Mengarahkan ke dashboard...");
-    } else {
-      alert("Username / Password salah, bro");
+  const cekUser = async () => {
+    try{
+      const response = await axios.post("http://localhost:8080/api/users/login",formData);
+      if(response.status == 200 || response.success == true){
+        setLogin(true);
+        return true;
+      }else{
+        setLogin(false);
+        return false;
+      }
+    }catch(err){
+      alert("gagal login!");
+      return false;
     }
   };
+
+  const onSubmit = async (e) => {
+    e.preventDefault(); // penting!
+    let response = await cekUser();
+    if(response || isLogin){
+      alert("Berhasil Login!");
+      navigate("/dashboard");
+    }else{
+      alert("Gagal Login! Mungkin ada masalah");
+    }
+  };
+
+  const onRegister = () => {
+    navigate("/register");
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -42,7 +72,7 @@ const LoginForm = () => {
                   required
                   value={nama}
                   onChange={onChangeData}
-                  placeholder="Masukkan username"
+                  placeholder="Masukkan nama lengkap"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -73,6 +103,14 @@ const LoginForm = () => {
               className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Login
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={onRegister}
+              className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Register
             </button>
           </div>
         </div>
