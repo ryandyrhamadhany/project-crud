@@ -8,12 +8,10 @@ import { Pagination } from "../components/users/Pagination";
 import { UserModal } from "../components/users/UserModal";
 import { users as initialData } from "../utils/dummyData";
 import { 
-  FaSort, FaChevronLeft, FaChevronRight,
-  FaUser, FaEnvelope, FaCalendar, FaBriefcase,
-  FaCircle, FaEdit, FaTrashAlt, FaPlus, FaSearch, FaFilter
+  FaFilter
 } from "react-icons/fa";
 
-export const UserCRUD = () => {
+export const Users = () => {
   const [users, setUsers] = useState(initialData);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: "id", direction: "ascending" });
@@ -184,4 +182,4 @@ export const UserCRUD = () => {
   );
 };
 
-export default UserCRUD;
+export default Users;
