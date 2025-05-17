@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
-import UserCRUD from "./components/UserCRUD";
+import Users from "./pages/Users";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
@@ -27,13 +27,13 @@ const App = () => {
             sidebarOpen ? "ml-64" : "ml-20"
           }`}
         >
-          <div className="p-6 m-4 bg-white rounded-lg shadow-md">
+          <div className=" bg-white rounded-lg shadow-md">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile_admin" element={<ProfileAdmin />} />
-              <Route path="/users" element={<UserCRUD />} />
+              <Route path="/users" element={<Users />} />
               <Route path="/tambah" element={<TambahData />} />
             </Routes>
           </div>
